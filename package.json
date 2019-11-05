@@ -1,0 +1,28 @@
+{
+  "name": "week8-postfeed-on",
+  "version": "1.0.0",
+  "description": "News feed built using express",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FACN7/week8-postfeed-on.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/FACN7/week8-postfeed-on/issues"
+  },
+  "homepage": "https://github.com/FACN7/week8-postfeed-on#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "env2": "^2.2.2",
+    "express": "^4.17.1",
+    "express-handlebars": "^3.1.0",
+    "pg": "^7.12.1",
+    "pg-promise": "^9.3.3"
+  }
+}
