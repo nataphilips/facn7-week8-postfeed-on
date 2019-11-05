@@ -17,4 +17,17 @@ router.get("/", (req, res, next) =>
     .catch(err => next(err))
 );
 
+router.post("/add-post", (req, res, next) => {
+  let post_title = req.body.title;
+  let text_content = req.body.text_content;
+  let pic_url = req.body.pic_url;
+  let user_id = Number(req.body.user_id);
+  // const { post_title, text_content, pic_url, user_id } = req.body;
+  queries
+    .newPost(post_title, text_content, pic_url, user_id)
+    // .then(post => res.status(201).json(post))
+    .then(res.redirect("/"))
+    .catch(err => next(err));
+});
+
 module.exports = router;
