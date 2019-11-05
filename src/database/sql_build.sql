@@ -1,6 +1,6 @@
 BEGIN;
 
-    DROP TABLE IF EXISTS users,tasks
+    DROP TABLE IF EXISTS users, posts
     CASCADE;
 
 CREATE TABLE users

@@ -3,7 +3,10 @@ const exphbs = require("express-handlebars");
 const routes = require("./routes/index.js");
 const express = require("express");
 const app = express();
+const bodyParser = require("body-parser");
 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(routes);
 
 app.set("views", path.join(__dirname, "..", "public", "views"));

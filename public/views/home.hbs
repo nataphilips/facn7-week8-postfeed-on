@@ -1,4 +1,11 @@
-<h1>Here's gonna be the body</h1>
+<h1>Add a new post</h1>
+<form class="new-post-form" action="/add-post" method="post">
+<input type="text" name="title" value="" placeholder="Title" class="post-input" >
+<input type="text" name="text_content" value="" placeholder="What do you want to share?" class="post-input" >
+<input type="text" name="pic_url" value="" placeholder="Post a picture URL" class="post-input" >
+<input type="number" name="user_id" value="" placeholder="Your ID"class="post-input" >
+<button type="submit" name="add-button">Add a post!</button>
+</form>
 <ul>
   {{#each users}}
   <li>{{this.user_name}}</li>
