@@ -1,6 +1,28 @@
+const path = require("path");
+const exphbs = require("express-handlebars");
+const routes = require("./routes/index.js");
 const express = require("express");
 const app = express();
 
-app.set("port", process.env.PORT || 3000);
+app.use(routes);
 
-module.exports = app;
+app.set("views", path.join(__dirname, "..", "public", "views"));
+app.set("view engine", "hbs");
+app.set("port", process.env.PORT || 3000);
+app.engine(
+  "hbs",
+  exphbs({
+    extname: "hbs",
+    layoutsDir: path.join(__dirname, "..", "public", "views", "layouts"),
+    partialsDir: path.join(__dirname, "..", "public", "views", "partials"),
+    defaultLayout: "main"
+    // helpers: {
+    //   popeval: popeval
+    // }
+  })
+);
+
+const port = app.get("port");
+app.listen(port, () => {
+  console.log(`Listening at port ${port}...`);
+});
