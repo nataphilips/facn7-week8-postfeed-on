@@ -3,6 +3,7 @@ const app = require("../app.js");
 const { Router } = express;
 const router = Router();
 const queries = require("../queries/queries");
+const error = require("./error");
 
 router.get("/", (req, res, next) =>
   queries
@@ -29,5 +30,8 @@ router.post("/add-post", (req, res, next) => {
     .then(res.redirect("/"))
     .catch(err => next(err));
 });
+
+router.use(error.client);
+router.use(error.server);
 
 module.exports = router;
