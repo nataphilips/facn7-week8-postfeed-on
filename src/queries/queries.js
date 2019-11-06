@@ -10,7 +10,7 @@ function getPosts() {
   return new Promise((resolve, reject) => {
     resolve(
       db.query(
-        `select user_name,title,content_text,content_img_url,post_rank from posts p join users u on u.user_id=p.user_id;`
+        `select user_name, u.user_id, title,content_text,content_img_url,post_rank from posts p join users u on u.user_id=p.user_id;`
       )
     );
   });

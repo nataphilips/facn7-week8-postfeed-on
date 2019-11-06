@@ -5,16 +5,25 @@ const router = Router();
 const queries = require("../queries/queries");
 const error = require("./error");
 const cookieParser = require("cookie-parser");
+const { sign, verify } = require("jsonwebtoken");
 
 router.get("/", (req, res, next) =>
   queries
     .getPosts()
     .then(posts => posts.rows)
     .then(data => {
-      res.render("home", {
-        title: "Posts",
-        posts: data
-      });
+      if (req.cookies["jwt"]) {
+        let token = req.cookies["jwt"];
+        let decoded = verify(token, "shhh");
+        console.log(decoded);
+        res.render("home", {
+          title: "Posts",
+          posts: data,
+          userCreds: decoded
+        });
+      } else {
+        res.redirect("/login");
+      }
     })
     .catch(err => next(err))
 );
@@ -32,6 +41,10 @@ router.post("/add-post", (req, res, next) => {
 
 router.get("/register", (req, res) => {
   res.render("register");
+});
+
+router.get("/login", (req, res) => {
+  res.render("login");
 });
 
 router.post("/create-user", (req, res) => {
@@ -57,18 +70,21 @@ router.post("/create-user", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.get("/login", (req, res) => {
+router.post("/auth", (req, res) => {
   queries
     .getUsers()
     .then(users => users.rows)
     .then(users =>
       users.filter(u => {
-        const user = u.user_name == username;
-        if (!user) {
+        const username = u.user_name;
+        const userID = u.user_id;
+        if (!username) {
           res.render("login", {
             message: "Password or username isn't correct"
           });
         } else {
+          const cookie = sign({ user_name: username, user_id: userID }, "shhh");
+          res.cookie("jwt", cookie);
           res.redirect("/");
         }
       })
@@ -76,12 +92,12 @@ router.get("/login", (req, res) => {
     .catch(err => console.log(err));
 });
 
-router.post("/auth", (req, res) => {
-  const { username, password } = req.body;
-  //check if user exists
-
-  //check if password match
-});
+// router.post("/auth", (req, res) => {
+//   const { username, password } = req.body;
+//   //check if user exists
+//
+//   //check if password match
+// });
 
 router.use(error.client);
 router.use(error.server);
