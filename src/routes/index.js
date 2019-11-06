@@ -55,7 +55,6 @@ router.get("/login", (req, res) => {
 });
 
 router.post("/create-user", (req, res) => {
-  //check if user is exists
   const { username, password } = req.body;
   queries
     .getUsers()
@@ -106,13 +105,6 @@ router.post("/auth", (req, res) => {
     })
     .catch(err => console.log(err));
 });
-
-// router.post("/auth", (req, res) => {
-//   const { username, password } = req.body;
-//   //check if user exists
-//
-//   //check if password match
-// });
 
 router.use(error.client);
 router.use(error.server);
