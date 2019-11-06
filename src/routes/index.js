@@ -4,6 +4,7 @@ const { Router } = express;
 const router = Router();
 const queries = require("../queries/queries");
 const error = require("./error");
+const cookieParser = require("cookie-parser");
 
 router.get("/", (req, res, next) =>
   queries
@@ -27,6 +28,59 @@ router.post("/add-post", (req, res, next) => {
     .newPost(post_title, text_content, pic_url, user_id)
     .then(res.redirect("/"))
     .catch(err => next(err));
+});
+
+router.get("/register", (req, res) => {
+  res.render("register");
+});
+
+router.post("/create-user", (req, res) => {
+  //check if user is exists
+  const { username, password } = req.body;
+
+  queries
+    .getUsers()
+    .then(users => users.rows)
+    .then(users =>
+      users.filter(u => {
+        const user = u.user_name == username;
+        if (user) {
+          res.render("register", {
+            message: "User with the given name already exists"
+          });
+        } else {
+          queries.newUser(username, password);
+          res.redirect("/");
+        }
+      })
+    )
+    .catch(err => console.log(err));
+});
+
+router.get("/login", (req, res) => {
+  queries
+    .getUsers()
+    .then(users => users.rows)
+    .then(users =>
+      users.filter(u => {
+        const user = u.user_name == username;
+        if (!user) {
+          res.render("login", {
+            message: "Password or username isn't correct"
+          });
+        } else {
+          res.redirect("/");
+        }
+      })
+    )
+    .catch(err => console.log(err));
+});
+
+router.post("/auth", (req, res) => {
+  const { username, password } = req.body;
+  //check if user exists
+
+  //check if password match
 });
 
 router.use(error.client);
