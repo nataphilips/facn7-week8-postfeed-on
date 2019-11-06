@@ -15,7 +15,7 @@ router.get("/", (req, res, next) =>
       if (req.cookies["jwt"]) {
         let token = req.cookies["jwt"];
         let decoded = verify(token, "shhh");
-        console.log(decoded);
+
         res.render("home", {
           title: "Posts",
           posts: data,
@@ -74,21 +74,20 @@ router.post("/auth", (req, res) => {
   queries
     .getUsers()
     .then(users => users.rows)
-    .then(users =>
-      users.filter(u => {
-        const username = u.user_name;
-        const userID = u.user_id;
-        if (!username) {
-          res.render("login", {
-            message: "Password or username isn't correct"
-          });
-        } else {
-          const cookie = sign({ user_name: username, user_id: userID }, "shhh");
-          res.cookie("jwt", cookie);
-          res.redirect("/");
-        }
-      })
-    )
+    .then(users => users.find(u => u.user_name === req.body.username))
+    .then(user => {
+      if (!user) {
+        res.render("login", {
+          message: "Password or username isn't correct"
+        });
+      } else {
+        const userID = user.user_id;
+        const username = user.user_name;
+        const cookie = sign({ user_name: username, user_id: userID }, "shhh");
+        res.cookie("jwt", cookie);
+        res.redirect("/");
+      }
+    })
     .catch(err => console.log(err));
 });
 
