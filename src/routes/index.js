@@ -28,6 +28,11 @@ router.get("/", (req, res, next) =>
     .catch(err => next(err))
 );
 
+router.post("/logout", (req, res) => {
+  res.cookie("jwt", 0, { maxAge: 0 });
+  res.redirect("/login");
+});
+
 router.post("/add-post", (req, res, next) => {
   let post_title = req.body.title;
   let text_content = req.body.text_content;

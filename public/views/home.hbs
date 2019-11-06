@@ -8,6 +8,9 @@
 </form>
 <div class="hello">
   Hello, {{userCreds.user_name}}
+  <form class="logout-form" action="/logout" method="post">
+    <button type="submit" name="logout-button">Log Out</button>
+  </form>
 </div>
 <div class="posts-container">
   {{#each posts}}
