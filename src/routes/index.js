@@ -6,6 +6,8 @@ const queries = require("../queries/queries");
 const error = require("./error");
 const cookieParser = require("cookie-parser");
 const { sign, verify } = require("jsonwebtoken");
+const { passwordHash } = require("../hash");
+const bcrypt = require("bcrypt");
 
 router.get("/", (req, res, next) =>
   queries
@@ -55,23 +57,21 @@ router.get("/login", (req, res) => {
 router.post("/create-user", (req, res) => {
   //check if user is exists
   const { username, password } = req.body;
-
   queries
     .getUsers()
     .then(users => users.rows)
-    .then(users =>
-      users.filter(u => {
-        const user = u.user_name == username;
-        if (user) {
-          res.render("register", {
-            message: "User with the given name already exists"
-          });
-        } else {
-          queries.newUser(username, password);
-          res.redirect("/");
-        }
-      })
-    )
+    .then(users => users.find(u => u.user_name == username))
+    .then(async user => {
+      if (user) {
+        res.render("register", {
+          message: "User with the given name already exists"
+        });
+      } else {
+        const hashed = await passwordHash(password);
+        queries.newUser(username, hashed);
+        res.redirect("/");
+      }
+    })
     .catch(err => console.log(err));
 });
 
@@ -86,11 +86,22 @@ router.post("/auth", (req, res) => {
           message: "Password or username isn't correct"
         });
       } else {
-        const userID = user.user_id;
-        const username = user.user_name;
-        const cookie = sign({ user_name: username, user_id: userID }, "shhh");
-        res.cookie("jwt", cookie);
-        res.redirect("/");
+        bcrypt.compare(req.body.password, user.password).then(hashed => {
+          if (hashed) {
+            const userID = user.user_id;
+            const username = user.user_name;
+            const cookie = sign(
+              { user_name: username, user_id: userID },
+              "shhh"
+            );
+            res.cookie("jwt", cookie);
+            res.redirect("/");
+          } else {
+            res.render("login", {
+              message: "Password or username isn't correct"
+            });
+          }
+        });
       }
     })
     .catch(err => console.log(err));
