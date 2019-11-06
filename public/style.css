@@ -1,0 +1,99 @@
+body {
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  background-color: #4c5c68;
+  color: #dcdcdd;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
+
+.navbar {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+#header-image {
+  width: 70%;
+}
+
+.hello {
+  display: flex;
+  width: 70%;
+  justify-content: flex-start;
+  margin: 10px;
+}
+
+.hello-name {
+  margin-right: 15px;
+  font-size: 24px;
+}
+
+.posts-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+}
+
+.single-post {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 20px;
+  border: 1px solid black;
+  width: 100%;
+  background-color: white;
+  color: #46494c;
+}
+
+.new-post-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  margin: 20px;
+  /* height: 40px; */
+  width: 70%;
+}
+.post-input {
+  height: 30px;
+  margin: 10px;
+  width: 80%;
+}
+
+#add-post-button {
+  width: 200px;
+  margin: 10px;
+  height: 40px;
+  font-family: "Roboto", sans-serif;
+  background-color: #dcdcdd;
+  color: #4c5c68;
+  font-size: 20px;
+}
+.post-title {
+  font-size: 26px;
+  margin: 10px;
+}
+
+.post-text {
+  margin: 20px;
+}
+
+.post-image {
+  width: 90%;
+}
+
+.img-container {
+  display: flex;
+  justify-content: center;
+}
+
+.author {
+  margin: 10px;
+}
