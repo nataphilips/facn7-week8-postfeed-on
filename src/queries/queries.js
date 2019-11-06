@@ -6,6 +6,16 @@ function getUsers() {
   });
 }
 
+function getPosts() {
+  return new Promise((resolve, reject) => {
+    resolve(
+      db.query(
+        `select user_name,title,content_text,content_img_url,post_rank from posts p join users u on u.user_id=p.user_id;`
+      )
+    );
+  });
+}
+
 function newPost(title, text, url, id) {
   return new Promise((resolve, reject) => {
     resolve(
@@ -19,5 +29,6 @@ function newPost(title, text, url, id) {
 
 module.exports = {
   getUsers,
-  newPost
+  newPost,
+  getPosts
 };
