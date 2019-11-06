@@ -6,8 +6,20 @@
 <input type="number" name="user_id" value="" placeholder="Your ID"class="post-input" >
 <button type="submit" name="add-button">Add a post!</button>
 </form>
-<ul>
-  {{#each users}}
-  <li>{{this.user_name}}</li>
-
+<div class="posts-container">
+  {{#each posts}}
+  <div class="single-post">
+    <div class="post-title">{{this.title}}</div>
+    <div class="post-text">{{this.content_text}} </div>
+    {{#if this.content_img_url }}
+    <div class="img-container">
+      <img src="{{this.content_img_url}}" alt="post-image" class="post-image">
+    </div>
+    {{/if}}
+  </div>
+  <div class="author">
+    Posted by: {{this.user_name}}
+  </div>
   {{/each}}
+
+</div>
