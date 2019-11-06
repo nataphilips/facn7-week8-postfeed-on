@@ -51,6 +51,7 @@ body {
   width: 100%;
   background-color: white;
   color: #46494c;
+  border-radius: 10px;
 }
 
 .new-post-form {
@@ -68,18 +69,41 @@ body {
   width: 80%;
 }
 
-#add-post-button {
-  width: 200px;
-  margin: 10px;
-  height: 40px;
-  font-family: "Roboto", sans-serif;
+button {
+  text-align: center;
+  cursor: pointer;
+  font-size: 24px;
+  padding: 15px 50px;
+  outline: none;
   background-color: #dcdcdd;
+  border: none;
+  border-radius: 5px;
+  box-shadow: 0 9px #95a5a6;
+  margin-top: 20px;
   color: #4c5c68;
-  font-size: 20px;
 }
+
+button:hover {
+  background-color: white;
+}
+
+button:active {
+  background-color: white;
+  box-shadow: 0 5px #95a5a6;
+  transform: translateY(4px);
+}
+
+.logout-button {
+  font-size: 16px;
+  padding: 10px 15px;
+  margin-top: 0px;
+}
+
 .post-title {
   font-size: 26px;
   margin: 10px;
+  padding-bottom: 5px;
+  border-bottom: 2px solid #dcdcdd;
 }
 
 .post-text {
