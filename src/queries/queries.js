@@ -27,8 +27,20 @@ function newPost(title, text, url, id) {
   });
 }
 
+function newUser(username, password) {
+  return new Promise((resolve, reject) => {
+    resolve(
+      db.query("INSERT INTO users (user_name, password) VALUES ($1, $2);", [
+        username,
+        password
+      ])
+    );
+  });
+}
+
 module.exports = {
   getUsers,
   newPost,
-  getPosts
+  getPosts,
+  newUser
 };
