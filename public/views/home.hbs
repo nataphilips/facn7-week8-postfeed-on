@@ -10,10 +10,10 @@
 <form class="new-post-form" action="/add-post" method="post">
   <input type="text" name="title" value="" placeholder="Title" class="post-input" required>
   <input type="text" name="text_content" value="" placeholder="What do you want to share?" class="post-input" required>
-  <input type="text" name="pic_url" value="" placeholder="Post a picture URL" class="post-input">
+  <input type="url" pattern="^(|https?:\/\/[\w\-_]+(\.[\w\-_]+)+([\w\-\.,@?^=%&amp;:/~\+#]*[\w\-\@?^=%&amp;/~\+#])?)$" name="pic_url" value="" placeholder="Post a picture URL" class="post-input">
   <input type="number" name="user_id" value="{{userCreds.user_id}}" placeholder="Your ID" class="post-input"
     style="display:none">
-  <button type="submit" name="add-button" id="add-post-button">Add a post!</button>
+  <button type="submit" name="add-button" id="add-post-button" >Add a post!</button>
 </form>
 <input type="text" placeholder="Search.." onchange="">
 <div class="posts-container">
@@ -33,3 +33,4 @@
   {{/each}}
 
 </div>
+<script src="/index.js" charset="utf-8"></script>

@@ -39,6 +39,16 @@ router.post("/add-post", (req, res, next) => {
   let post_title = req.body.title;
   let text_content = req.body.text_content;
   let pic_url = req.body.pic_url;
+  console.log(pic_url);
+  if (
+    !pic_url.includes("png") &&
+    !pic_url.includes("jpeg") &&
+    !pic_url.includes("jpg")
+  ) {
+    console.log(!pic_url.includes("jpg"));
+    pic_url = "";
+    console.log("I didn't add any picture");
+  }
   user_id = Number(req.body.user_id);
   queries
     .newPost(post_title, text_content, pic_url, user_id)
@@ -72,7 +82,7 @@ router.post("/create-user", (req, res) => {
         res.redirect("/");
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => next(err));
 });
 
 router.post("/auth", (req, res) => {
@@ -104,7 +114,7 @@ router.post("/auth", (req, res) => {
         });
       }
     })
-    .catch(err => res.send(err));
+    .catch(err => next(err));
 });
 
 router.use(error.client);
