@@ -17,6 +17,8 @@ You can clone the repo by typing the command
 
 ## user journey
 
+![](https://media.giphy.com/media/14nR89kC0mcYU0/giphy.gif)
+
 We are the 7th cohort of Founders & Coders and we want our own social platform. And now we can:
 
 * Sign up to the application
@@ -29,6 +31,8 @@ We are the 7th cohort of Founders & Coders and we want our own social platform. 
 
 
 ## our process:
+
+![](https://media.giphy.com/media/yWh7b6fWA5rJm/giphy.gif)
 
 - [x] Set up project architecture
 - [x] Set up a server
@@ -46,7 +50,7 @@ Stretch goals:
 
 - [x] Authentication
 - [ ] Delete a post
-- [ ] Client-side validation of URL
+- [x] Client-side validation of URL
 - [ ] Codecov and Travis
 
 ## new stuff we've learned
@@ -54,3 +58,12 @@ Stretch goals:
 * Lots of Express syntax
 * How to use Promises pretty much everywhere we used callbacks before
 * How to use handlebars and layouts
+
+## we are proud of:
+
+![](http://giphygifs.s3.amazonaws.com/media/Is1O1TWV0LEJi/giphy.gif)
+
+* Mostly using Promises, reducing usage of callbacks to minimum
+* Using new syntax (Async - Await)
+* Completing a stretch goal of adding authentication which works smoothly
+* UI is getting friendly (although some extra work could be done)
