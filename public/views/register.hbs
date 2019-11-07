@@ -1,10 +1,15 @@
 <form action="/create-user" method="post">
   <input type="text" name="username" placeholder="User Name">
-  <input type="text" name="password" placeholder="Password">
+  <input type="password" name="password" placeholder="Password">
   <button type="submit">Register</button>
 </form>
 <div>
   {{#if message }}
   {{message}}
   {{/if}}
+  {{#if url }}
+  <a href={{url}}>Login</a>
+  {{/if}}
+
+
 </div>

@@ -63,7 +63,8 @@ router.post("/create-user", (req, res) => {
     .then(async user => {
       if (user) {
         res.render("register", {
-          message: "User with the given name already exists"
+          message: "User with the given name already exists, Plaese login",
+          url: `/login`
         });
       } else {
         const hashed = await passwordHash(password);
@@ -97,13 +98,13 @@ router.post("/auth", (req, res) => {
             res.redirect("/");
           } else {
             res.render("login", {
-              message: "Password or username isn't correct"
+              message: "Password or username isn't correct "
             });
           }
         });
       }
     })
-    .catch(err => console.log(err));
+    .catch(err => res.send(err));
 });
 
 router.use(error.client);
